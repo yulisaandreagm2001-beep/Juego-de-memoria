@@ -1,0 +1,45 @@
+/* --- Ajuste general del tablero --- */
+.tablero {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+  gap: 20px; /* más espacio entre cartas */
+  justify-items: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* --- Tamaño más grande para las cartas --- */
+.tablero img {
+  width: 200px;    /* antes 120px */
+  height: 300px;   /* antes 120px */
+  object-fit: contain; /* recorta sin deformar */
+  object-position: center;
+  border-radius: 5px; /* esquinas redondeadas */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+/* --- Efecto al pasar el mouse --- */
+.tablero img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Ajuste responsivo (en pantallas pequeñas) --- */
+@media (max-width: 992px) {
+  .tablero {
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas medianas */
+  }
+}
+
+@media (max-width: 768px) {
+  .tablero {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets/celulares */
+  }
+
+  .tablero img {
+    width: 120px;
+    height: 120px;
+  }
+}
