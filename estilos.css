@@ -1,115 +1,75 @@
-/* --- Ajuste general del tablero --- */
-.tablero {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
-  gap: 20px; /* más espacio entre cartas */
-  justify-items: center;
-  align-items: center;
-  margin-top: 20px;
-  padding: 10px;
+/* --- Fondo general del juego --- */
+body {
+  background-image: url("./imagenes/fondoDePantalla (2).jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
 }
 
-/* --- Contenedor de cada carta (para efecto flip) --- */
-.carta {
+/* --- Encabezados y texto --- */
+h1, h2 {
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.nav-link {
+  text-shadow: 1px 1px 3px black;
+}
+
+/* --- Contenedor del tablero (mantiene Bootstrap) --- */
+.tablero {
+  margin-top: 20px;
+}
+
+/* --- Cartas (mantiene el tamaño original que te funcionaba) --- */
+.altura-img {
+  width: 200px;     /* 🔹 tamaño original funcional */
+  height: 300px;
+  object-fit: contain; /* mantiene proporciones sin cortar */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.altura-img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Cartas bloqueadas (aciertos) --- */
+.bloqueada {
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* --- Imagen de felicitaciones (para que no se recorte) --- */
+img[src*="felicitaciones"] {
   width: 200px;
   height: 300px;
-  perspective: 1000px; /* necesaria para 3d */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* --- Interior que gira --- */
-.carta-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.5s;
-  transform-style: preserve-3d; /* para que el giro sea 3D */
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-/* Cuando tiene la clase 'flipped' gira 180deg */
-.carta.flipped .carta-inner {
-  transform: rotateY(180deg);
-}
-
-/* Caras front y back */
-.carta-front,
-.carta-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden; /* evita que la cara oculta se vea al girar */
-  border-radius: 6px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.carta-front img,
-.carta-back img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Back (visible inicialmente) */
-.carta-front {
-  transform: rotateY(0deg);
-  /* esta será la cara oculta (imagen de "ocultar.jpg") */
-}
-
-/* Front alterno (la cara visible cuando se gira) */
-.carta-back {
-  transform: rotateY(180deg);
-}
-
-/* --- Efecto al pasar el mouse --- */
-.carta:hover .carta-inner {
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
-  transform: translateY(-3px);
-}
-
-/* --- Ajuste responsivo (en pantallas pequeñas) --- */
+/* --- Ajuste para pantallas medianas y pequeñas --- */
 @media (max-width: 992px) {
-  .tablero {
-    grid-template-columns: repeat(3, 1fr);
+  .altura-img {
+    width: 150px;
+    height: 220px;
   }
-  .carta { width: 160px; height: 240px; }
 }
 
 @media (max-width: 768px) {
-  .tablero {
-    grid-template-columns: repeat(2, 1fr);
+  .altura-img {
+    width: 120px;
+    height: 160px;
   }
-
-  .carta { width: 120px; height: 160px; }
 }
 
-/* Desactivar interacciones y efectos en cartas bloqueadas */
-.bloqueada {
-  pointer-events: none;
-  opacity: 0.95;
-}
-.bloqueada .carta-inner {
-  transform: none !important;
-  box-shadow: none !important;
-}
-/*fondo del juego*/
-body {
-  background-image: url("ruta/de/tu/imagen.jpg"); /* 📸 ruta de tu imagen */
-  background-size: cover;        /* Hace que la imagen cubra toda la pantalla */
-  background-position: center;   /* Centra la imagen */
-  background-repeat: no-repeat;  /* Evita que la imagen se repita */
-  height: 100vh;                 /* Asegura que cubra toda la altura */
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-attachment: fixed;
-  background-image: url("./imagenes/fondoDePantalla\ \(2).jpg");
-  cursor: pointer;
-}
 
 
